@@ -1,2 +1,4 @@
 ﻿config
 repos
+.vscode
+omnisharp.json
