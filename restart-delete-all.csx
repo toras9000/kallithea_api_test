@@ -7,21 +7,23 @@ await Paved.RunAsync(async () =>
     var composeFile = ThisSource.GetRelativeFile("docker-compose.yml");
     if (!composeFile.Exists) throw new PavedMessageException("Not found compose file");
 
-    Console.WriteLine("Stop service");
-    var downProc = Process.Start("docker-compose", $"--file \"{composeFile.FullName}\" down");
-    await downProc.WaitForExitAsync();
-    if (downProc.ExitCode != 0) throw new PavedMessageException($"Failed to down. ExitCode={downProc.ExitCode}");
+    var redirect = false;
+    var outWriter = redirect ? Console.Out : null;
+    var errWriter = redirect ? Console.Error : null;
 
-    Console.WriteLine("Delete files");
+    Console.WriteLine("Stop service");
+    var downResult = await CmdProc.ExecAsync("docker-compose", new[] { "--file", composeFile.FullName, "down", }, stdOutWriter: outWriter, stdErrWriter: errWriter);
+    if (downResult != 0) throw new PavedMessageException($"Failed to down. ExitCode={downResult}");
+
+    Console.WriteLine("Delete config/repos");
     var confDir = ThisSource.GetRelativeDirectory("config");
     var reposDir = ThisSource.GetRelativeDirectory("repos");
     if (confDir.Exists) { confDir.DoFiles(c => c.File?.SetReadOnly(false)); confDir.Delete(recursive: true); }
     if (reposDir.Exists) { reposDir.DoFiles(c => c.File?.SetReadOnly(false)); reposDir.Delete(recursive: true); }
 
     Console.WriteLine("Start service");
-    var upProc = Process.Start("docker-compose", $"--file \"{composeFile.FullName}\" up -d");
-    await upProc.WaitForExitAsync();
-    if (upProc.ExitCode != 0) throw new PavedMessageException($"Failed to up. ExitCode={upProc.ExitCode}");
+    var upResult = await CmdProc.ExecAsync("docker-compose", new[] { "--file", composeFile.FullName, "up", "-d", }, stdOutWriter: outWriter, stdErrWriter: errWriter);
+    if (upResult != 0) throw new PavedMessageException($"Failed to up. ExitCode={upResult}");
 
     Console.Write("Waiting initialize ... ");
     using var timer = new CancellationTokenSource(TimeSpan.FromSeconds(30));

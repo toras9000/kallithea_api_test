@@ -15,11 +15,11 @@ var key = "1111222233334444555566667777888899990000";
 
 // prepare
 var now = DateTime.Now;
-var kclient = new KallitheaClient(url, key);
-var grpA = (await kclient.CreateRepoGroupAsync(new($"parent_{now:HHmm_ss}_A"))).result.repo_group;
-var grpB = (await kclient.CreateRepoGroupAsync(new($"parent_{now:HHmm_ss}_B"))).result.repo_group;
-var subgrp = (await kclient.CreateRepoGroupAsync(new($"sub_{now:HHmm_ss}", parent: grpA.group_name))).result.repo_group;
-var subsubgrp = (await kclient.CreateRepoGroupAsync(new($"subsub_{now:HHmm_ss}", parent: subgrp.group_name))).result.repo_group;
+var kclient = new ShuckedKallitheaClient(url, key);
+var grpA = await kclient.CreateRepoGroupAsync(new($"parent_{now:HHmm_ss}_A"));
+var grpB = await kclient.CreateRepoGroupAsync(new($"parent_{now:HHmm_ss}_B"));
+var subgrp = await kclient.CreateRepoGroupAsync(new($"sub_{now:HHmm_ss}", parent: grpA.group_name));
+var subsubgrp = await kclient.CreateRepoGroupAsync(new($"subsub_{now:HHmm_ss}", parent: subgrp.group_name));
 await kclient.CreateRepoAsync(new($"{subgrp.group_name}/repo_{now:HHmm_ss}_A", repo_type: RepoType.git));
 await kclient.CreateRepoAsync(new($"{subgrp.group_name}/repo_{now:HHmm_ss}_B", repo_type: RepoType.hg));
 await kclient.CreateRepoAsync(new($"{subsubgrp.group_name}/repo_{now:HHmm_ss}_A", repo_type: RepoType.git));
