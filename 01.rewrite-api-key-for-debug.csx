@@ -10,7 +10,7 @@ using System.Data.SQLite;
 using Dapper;
 using Lestaly;
 
-await Paved.RunAsync(async () =>
+return await Paved.RunAsync(optionsBuilder: o => { var _ = Args.Contains("--nointeract") ? o.NoPause() : o.AnyPause(); }, action: async () =>
 {
     // API key to set up.
     var apiKey = "1111222233334444555566667777888899990000";
@@ -27,4 +27,4 @@ await Paved.RunAsync(async () =>
     using var db = new SQLiteConnection(db_settings.ConnectionString);
     await db.ExecuteAsync("update users set api_key = @key where username = 'admin'", new { key = apiKey, });
 
-}, o => o.AnyPause());
+});

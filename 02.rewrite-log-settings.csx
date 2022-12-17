@@ -103,7 +103,7 @@ var settings = new
     """,
 };
 
-await Paved.RunAsync(async () =>
+return await Paved.RunAsync(optionsBuilder: o => { var _ = Args.Contains("--nointeract") ? o.NoPause() : o.AnyPause(); }, action: async () =>
 {
     // check ini file.
     var iniFile = ThisSource.GetRelativeFile(settings.IniPath);
@@ -151,4 +151,4 @@ await Paved.RunAsync(async () =>
         Console.WriteLine("Not rewrite.");
     }
 
-}, o => o.AnyPause());
+});

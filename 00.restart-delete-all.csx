@@ -2,7 +2,7 @@
 using System.Threading;
 using Lestaly;
 
-await Paved.RunAsync(async () =>
+return await Paved.RunAsync(optionsBuilder: o => { if (Args.Contains("--nointeract")) { o.NoPause(); } }, action: async () =>
 {
     var composeFile = ThisSource.GetRelativeFile("docker-compose.yml");
     if (!composeFile.Exists) throw new PavedMessageException("Not found compose file");
