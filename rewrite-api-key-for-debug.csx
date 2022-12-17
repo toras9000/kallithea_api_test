@@ -1,6 +1,6 @@
-#r "nuget: System.Data.SQLite.Core, 1.0.116"
+#r "nuget: System.Data.SQLite.Core, 1.0.117"
 #r "nuget: Dapper, 2.0.123"
-#r "nuget: Lestaly, 0.13.0"
+#r "nuget: Lestaly, 0.19.0"
 
 // This script is meant to run with dotnet-script.
 // You can install .NET SDK 6.0 and install dotnet-script with the following command.

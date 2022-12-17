@@ -1,5 +1,5 @@
-#r "nuget: Lestaly, 0.13.0"
-#r "nuget: KallitheaApiClient, 0.7.0.8"
+#r "nuget: Lestaly, 0.19.0"
+#r "nuget: KallitheaApiClient, 0.7.0.10"
 
 // This script is meant to run with dotnet-script.
 // You can install .NET SDK 6.0 and install dotnet-script with the following command.
