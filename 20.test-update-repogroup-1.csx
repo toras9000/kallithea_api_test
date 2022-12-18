@@ -1,12 +1,13 @@
-#r "nuget: Lestaly, 0.19.0"
-
 // This script is meant to run with dotnet-script.
 // You can install .NET SDK 6.0 and install dotnet-script with the following command.
 // $ dotnet tool install -g dotnet-script
 
+#r "nuget: Lestaly, 0.19.0"
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
+
+// Create a nested repository group and rename it.
 
 var url = new Uri("http://localhost:9999/_admin/api");
 var key = "1111222233334444555566667777888899990000";

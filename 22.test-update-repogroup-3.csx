@@ -1,14 +1,16 @@
-#r "nuget: Lestaly, 0.19.0"
-#r "nuget: KallitheaApiClient, 0.7.0.10"
-
 // This script is meant to run with dotnet-script.
 // You can install .NET SDK 6.0 and install dotnet-script with the following command.
 // $ dotnet tool install -g dotnet-script
 
+#r "nuget: Lestaly, 0.19.0"
+#r "nuget: KallitheaApiClient, 0.7.0.10"
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using KallitheaApiClient;
+using KallitheaApiClient.Utils;
+
+// Create a nested repository group and rename and move it. Use lib.
 
 var url = new Uri("http://localhost:9999/_admin/api");
 var key = "1111222233334444555566667777888899990000";

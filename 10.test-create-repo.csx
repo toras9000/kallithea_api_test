@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 
+// Create a repository from API.
+
 var url = new Uri("http://localhost:9999/_admin/api");
 var key = "1111222233334444555566667777888899990000";
 

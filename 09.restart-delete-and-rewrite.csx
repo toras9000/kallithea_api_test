@@ -1,6 +1,16 @@
+// This script is meant to run with dotnet-script.
+// You can install .NET SDK 6.0 and install dotnet-script with the following command.
+// $ dotnet tool install -g dotnet-script
+
 #r "nuget: Lestaly, 0.19.0"
 using System.Threading;
 using Lestaly;
+
+// Reset the state for testing.
+// Do the following in order
+// - Restart docker container with deletion of persistent data.
+// - Rewrite to API key for debugging.
+// - Rewrite log settings.
 
 return await Paved.RunAsync(async () =>
 {

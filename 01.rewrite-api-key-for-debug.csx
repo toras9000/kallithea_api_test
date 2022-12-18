@@ -1,14 +1,15 @@
-#r "nuget: System.Data.SQLite.Core, 1.0.117"
-#r "nuget: Dapper, 2.0.123"
-#r "nuget: Lestaly, 0.19.0"
-
 // This script is meant to run with dotnet-script.
 // You can install .NET SDK 6.0 and install dotnet-script with the following command.
 // $ dotnet tool install -g dotnet-script
 
+#r "nuget: System.Data.SQLite.Core, 1.0.117"
+#r "nuget: Dapper, 2.0.123"
+#r "nuget: Lestaly, 0.19.0"
 using System.Data.SQLite;
 using Dapper;
 using Lestaly;
+
+// In kallithea's SQLite database, rewrite admin's API key to a fixed key for debugging.
 
 return await Paved.RunAsync(optionsBuilder: o => { var _ = Args.Contains("--nointeract") ? o.NoPause() : o.AnyPause(); }, action: async () =>
 {
