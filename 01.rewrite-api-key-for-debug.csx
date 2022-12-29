@@ -4,7 +4,7 @@
 
 #r "nuget: System.Data.SQLite.Core, 1.0.117"
 #r "nuget: Dapper, 2.0.123"
-#r "nuget: Lestaly, 0.19.0"
+#r "nuget: Lestaly, 0.20.0"
 using System.Data.SQLite;
 using Dapper;
 using Lestaly;

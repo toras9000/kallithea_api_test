@@ -2,7 +2,7 @@
 // You can install .NET SDK 6.0 and install dotnet-script with the following command.
 // $ dotnet tool install -g dotnet-script
 
-#r "nuget: Lestaly, 0.19.0"
+#r "nuget: Lestaly, 0.20.0"
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -23,7 +23,18 @@ Console.WriteLine($"Test repogroup: {parentName}/{subName}");
 
 // test update_repo_group - no parent
 Console.WriteLine("Test update repogroup");
-var parameter = new { id = "0", api_key = key, method = "update_repo_group", args = new { repogroupid = $"{parentName}/{subName}", group_name = $"{subName}-renamed",  description = "abc", } };
+var parameter = new
+{
+    id = "0",
+    api_key = key,
+    method = "update_repo_group",
+    args = new
+    {
+        repogroupid = $"{parentName}/{subName}",
+        group_name = $"{subName}-renamed",
+        description = "abc",
+    },
+};
 Console.WriteLine($"req: {JsonSerializer.Serialize(parameter)}");
 var response = await client.PostAsJsonAsync(url, parameter);
 Console.WriteLine($"rsp: {await response.Content.ReadFromJsonAsync<JsonElement>()}");

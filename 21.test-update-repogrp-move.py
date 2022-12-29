@@ -15,20 +15,19 @@ parentNameB = f"parent_{now:%H%M_%S}_B"
 parentGrpB = requests.post(url, json={ "id": "0", "api_key": api_key, "method": "create_repo_group", "args": { "group_name": parentNameB } }).json()
 subName = f"sub_{now:%H%M_%S}"
 subGrp = requests.post(url, json={ "id": "0", "api_key": api_key, "method": "create_repo_group", "args": { "group_name": subName, "parent": parentNameA } }).json()
+print(f"Test repogroup: {parentNameA}/{subName}")
 
 # test update_repo_group - change parent
-
-params = {
+print("Test update repogroup")
+parameter = {
     "id": "0",
     "api_key": api_key,
-    "method": "create_repo",
+    "method": "update_repo_group",
     "args": {
-        "repo_name" : f"test_{datetime.datetime.now():%H%M_%S}", 
-        "enable_downloads": True,
-        "enable_statistics": True,
-    }
+        "repogroupid": f"{parentNameA}/{subName}",
+        "parent": parentNameB,
+    },
 }
-
-print(f"req: {params}")
+print(f"req: {parameter}")
 response = requests.post(url, json={ "id": "0", "api_key": api_key, "method": "update_repo_group", "args": { "repogroupid": f"{parentNameA}/{subName}", "parent": parentNameB } }).json()
 print(f"req: {response}")

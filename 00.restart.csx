@@ -2,7 +2,7 @@
 // You can install .NET SDK 6.0 and install dotnet-script with the following command.
 // $ dotnet tool install -g dotnet-script
 
-#r "nuget: Lestaly, 0.19.0"
+#r "nuget: Lestaly, 0.20.0"
 using Lestaly;
 
 // Restart the docker container with the data intact.

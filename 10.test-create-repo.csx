@@ -11,7 +11,8 @@ using System.Text.Json;
 var url = new Uri("http://localhost:8888/_admin/api");
 var key = "1111222233334444555566667777888899990000";
 
-var parameters = new
+var client = new HttpClient();
+var parameter = new
 {
     id = "0",
     api_key = key,
@@ -21,13 +22,9 @@ var parameters = new
         repo_name = $"test_{DateTime.Now:HHmm_ss}",
         enable_downloads = true,
         enable_statistics = true,
-    }
+    },
 };
-
-Console.WriteLine($"req: {JsonSerializer.Serialize(parameters)}");
-
-var client = new HttpClient();
-var response = await client.PostAsJsonAsync(url, parameters);
-
+Console.WriteLine($"req: {JsonSerializer.Serialize(parameter)}");
+var response = await client.PostAsJsonAsync(url, parameter);
 var rest_json = await response.Content.ReadFromJsonAsync<JsonElement>();
 Console.WriteLine($"rsp: {rest_json}");
