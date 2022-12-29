@@ -4,7 +4,7 @@ import datetime
 
 # Create and move nested repository groups. for Python
 
-url = 'http://localhost:9999//_admin/api'
+url = 'http://localhost:8888//_admin/api'
 api_key = '1111222233334444555566667777888899990000'
 
 # prepare

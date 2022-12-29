@@ -12,7 +12,7 @@ using KallitheaApiClient.Utils;
 
 // Moving a repository group with child elements.
 
-var url = new Uri("http://localhost:9999/_admin/api");
+var url = new Uri("http://localhost:8888/_admin/api");
 var key = "1111222233334444555566667777888899990000";
 
 // prepare
